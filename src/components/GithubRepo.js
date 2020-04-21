@@ -21,7 +21,7 @@ export class GithubRepo extends Component {
         console.log("state: ", this.state);
         return (
             <div>
-                { query ? <h1>Repositories with {query}</h1> : null}
+                { query ? <h1>Displaying Repositories with "{query}"</h1> : null}
             </div>
         )
     }
