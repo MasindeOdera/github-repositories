@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Accounts from './Accounts';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRepos } from '../actions/reposActions';
@@ -16,12 +17,16 @@ export class GithubRepo extends Component {
     }
 
     render() {
-        const {query} = this.props;
+        const {query, repos} = this.props;
         console.log("props: ", this.props);
-        console.log("state: ", this.state);
+        console.log("repos: ", repos);
+        let content = '';
+        content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
+
         return (
             <div>
                 { query ? <h1>Displaying Repositories with "{query}"</h1> : null}
+                {content}
             </div>
         )
     }
