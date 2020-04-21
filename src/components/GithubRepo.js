@@ -25,7 +25,7 @@ export class GithubRepo extends Component {
 
         return (
             <div>
-                { query ? <h1>Displaying Repositories with "{query}"</h1> : null}
+                { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
                 {content}
             </div>
         )
