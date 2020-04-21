@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { fetchNews, searchNews, setLoading} from '../actions/newsActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchRepos } from '../actions/reposAction';
 import '../App.css';
 
 class SearchBar extends Component {
     constructor(props) {
         super(props)
-        this.state = { query: this.query, article: this.props.article};
+        this.state = { query: this.query};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     handleChange(e) {
         e.preventDefault();
-        this.props.setLoading();
-        this.props.searchNews(e.target.value);
+        this.props.fetchRepos(e.target.value);
     }
     
     handleSubmit(e) {
         e.preventDefault();
-        this.props.setLoading();
-        this.props.fetchNews(this.props.query);
+        this.props.fetchRepos(this.props.query);
     }
 
     render() {
@@ -48,15 +46,13 @@ class SearchBar extends Component {
     }
 }
 
-// SearchBar.protoTypes = {
-//     fetchNews: PropTypes.func.isRequired,
-//     searchNews: PropTypes.func.isRequired,
-//     setLoading: PropTypes.func.isRequired,
-// }
+SearchBar.protoTypes = {
+    fetchRepos: PropTypes.func.isRequired,
+}
 
-// const mapStateToProps = state => ({
-//     query: state.news.query,
-// });
+const mapStateToProps = state => ({
+    query: state.query,
+});
 
-export default SearchBar
-// export default connect(mapStateToProps, { fetchNews, searchNews, setLoading })(SearchBar);
+// export default SearchBar
+export default connect(mapStateToProps, { fetchRepos })(SearchBar);
