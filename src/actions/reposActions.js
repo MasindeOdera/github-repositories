@@ -17,7 +17,7 @@ export const fetchRepos = query => dispatch => {
     .then(data => dispatch({
         type: FETCH_REPOS,
         payload: data.items,
-    })).then(items => console.log(items));
+    })).then(data => console.log(data));
 };
 
 export const fetchQuery = query => {

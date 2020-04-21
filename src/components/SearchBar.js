@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRepos } from '../actions/reposAction';
+import { fetchQuery, fetchRepos } from '../actions/reposActions';
 import '../App.css';
 
 class SearchBar extends Component {
     constructor(props) {
         super(props)
-        this.state = { query: this.query};
+        this.state = { query: this.props.query};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     handleChange(e) {
         e.preventDefault();
-        this.props.fetchRepos(e.target.value);
+        this.props.fetchQuery(e.target.value);
+        console.log(e.target.value);
     }
     
     handleSubmit(e) {
         e.preventDefault();
         this.props.fetchRepos(this.props.query);
+        console.log(this.props.query);
     }
 
     render() {
@@ -47,12 +49,12 @@ class SearchBar extends Component {
 }
 
 SearchBar.protoTypes = {
+    fetchQuery: PropTypes.func.isRequired,
     fetchRepos: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-    query: state.query,
+    query: state.repos.query,
 });
 
-// export default SearchBar
-export default connect(mapStateToProps, { fetchRepos })(SearchBar);
+export default connect(mapStateToProps, { fetchQuery, fetchRepos })(SearchBar);

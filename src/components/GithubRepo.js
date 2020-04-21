@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { sth } from '../actions/repoActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchRepos } from '../actions/reposActions';
 
 export class GithubRepo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            repos: [],
+            repos: this.props.repos,
         }
     }
 
-    getDerivedState() {
-        //somethign here?
+    componentDidMount() {
+        this.setState({repos: this.props.repos});
     }
 
     render() {
+        const {query} = this.props;
+        console.log("props: ", this.props);
+        console.log("state: ", this.state);
         return (
             <div>
-                <h1>Repositories with "search"</h1>
+                { query ? <h1>Repositories with {query}</h1> : null}
             </div>
         )
     }
 }
 
-export default GithubRepo
+GithubRepo.prototypes = {
+    fetchRepos: PropTypes.func.isRequired,
+    repos: PropTypes.array.isRequired,
+}
+
+const mapStateToProps = state => ({
+    repos: state.repos.items,
+    query: state.repos.query,
+});
+
+export default connect(mapStateToProps, { fetchRepos })(GithubRepo);
