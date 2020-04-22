@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-
+import '../App.css';
 
 class Accounts extends Component {
     render() {
         console.log("this.props in Accounts: ", this.props);
         const {repos} = this.props;
-        let account = (<div style={repoStyle}>
-            <div style={border} className="Card">
-                <div style={clearfix}>
-                <img src={repos.owner.avatar_url} alt="img" style={repoImage} />
-                <h3 style={{fontSize: '0.86rem',}}>{repos.title}</h3>
-                <h4 style={repoAuthor}>- {repos.owner.login}</h4>
-                <p style={repoDescriton}>{repos.description}</p>
-                </div>
-            </div>
-        </div>);
+        let account = (<table>
+            <tbody>
+            <tr>
+                <td><img src={repos.owner.avatar_url} alt="img" style={repoImage} /></td>
+                <td style={{fontSize: '0.86rem',}}>{repos.owner.login}</td>
+                <td>{repos.description}</td>
+                <td>{repos.created_at.slice(0,10)}</td>
+                <td>{repos.watchers}</td>
+                <td>{String(repos.private)}</td>
+            </tr>
+            </tbody>
+        </table>);
 
         return (
             <React.Fragment>
@@ -24,53 +26,9 @@ class Accounts extends Component {
     }
 }
 
-const repoStyle = {
-    color: '#000',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
-    gridGap: '1rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 'auto',
-}
-
-const border = {
-    padding: '1.2rem 10px',
-    marginTop: '20px',
-    backgroundColor: '#ff0000',
-}
-
-const clearfix = {
-    color: '#222',
-    fontWeight: '500',
-    textTransform: 'capitalize',
-    fontSize: '1.1rem',
-    textAlign: 'left',
-    height: '310px',
-    padding: '0.2rem',
-    marginTop: '-20px',
-}
-
 const repoImage = {
-    width: '10rem',
-    // width: '100%',
-    height: '10rem',
-    objectFit: 'contain',
+    width: '4rem',
+    height: '4rem',
 }
 
-const repoAuthor = {
-    margin: '2px',
-    whiteSpace: 'nowrap',
-    width: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-}
-
-const repoDescriton = {
-    whiteSpace: 'nowrap',
-    width: '100%',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-}
-
-export default Accounts
+export default Accounts;

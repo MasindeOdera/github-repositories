@@ -29,8 +29,8 @@ a {
 .btn {
   display: inline-block;
   border: none;
-  background: #b3b3b3;
-  color: #000;
+  background: #3d3d41;
+  color: #fff;
   padding: 2px 6px;
   cursor: pointer;
   font-size: calc(10px + 2vmin);
@@ -38,4 +38,58 @@ a {
 
 .btn:hover {
   color: '#fff';
+}
+
+table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns: 
+    minmax(100px, 1fr)
+    minmax(150px, 1.67fr)
+    minmax(200px, 4.33fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 3.33fr)
+    minmax(100px, 1.67fr)
+}
+
+thead,
+tbody,
+tr {
+  display: contents;
+  cursor: pointer;
+}
+
+th,
+td {
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #3d3d41;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: white;
+}
+
+th:last-child {
+  border: 0;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #808080;
+}
+
+tr:nth-child(even) td {
+  background: #099604;
+  background-color: #099604;
 }
