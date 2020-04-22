@@ -23,13 +23,17 @@ export class GithubRepo extends Component {
         console.log("repos: ", repos);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
-        const header = repos.length > 0 ? <table><thead><tr><th>Avatar</th><th>Name</th><th>Description</th><th>Created</th><th>Watchers</th><th>Private</th></tr></thead></table> : null;
+        const header = repos.length > 0 ? <thead><tr><th>Avatar</th><th>Name</th><th>Description</th><th>Created</th><th>Watchers</th><th>Private</th></tr></thead> : null;
 
         return (
             <div>
                 { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
-                {header}
-                {content}
+                <table  className="Account">
+                    <tbody>
+                        {header}
+                        {content}
+                    </tbody>
+                </table>
             </div>
         )
     }

@@ -43,21 +43,20 @@ a {
 table {
   display: grid;
   border-collapse: collapse;
-  min-width: 100%;
+  max-width: 900px;
   grid-template-columns: 
-    minmax(100px, 1fr)
-    minmax(150px, 1.67fr)
-    minmax(200px, 4.33fr)
-    minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr)
-    minmax(100px, 1.67fr)
+  minmax(16%, 1fr)
+  minmax(16%, 1.67fr)
+  minmax(16%, 4.33fr)
+  minmax(16%, 1.67fr)
+  minmax(16%, 3.33fr)
+  minmax(16%, 1.67fr)
 }
 
 thead,
 tbody,
 tr {
   display: contents;
-  cursor: pointer;
 }
 
 th,
@@ -86,10 +85,8 @@ th:last-child {
 td {
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #808080;
+  color: #000;
 }
 
-tr:nth-child(even) td {
-  background: #099604;
-  background-color: #099604;
-}
+.Account tr:nth-child(even) td {background: #d9d9df}
+.Account tr:nth-child(odd) td {background: #5e5e64}
