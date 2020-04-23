@@ -5,39 +5,40 @@ import PropTypes from 'prop-types';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-export class AccountDetail extends Component {
+class AccountDetail extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            detail: this.props.detail,
+            user: [],
         };
     }
 
     componentDidMount() {
         let user = this.props.match.params.id;
-        // console.log(user);
         // this.props.fetchDetail(user);
         this.props.findUser(user);
-        this.setState({detail:this.props.detail});
+        this.props.fetchDetail();
+        console.log(user);
+        this.setState({user: this.props.user[0]});
+        console.log(user, this.props.user);
 
-        // let a = this.props.repos;
-        // console.log(a);
-          
-        // function b(idToSearch) {
-        //     return a.filter(detail => {
-        //         return detail.id === idToSearch
+        // let a = this.state.user;
+        
+        // function b(user) {
+        //     return a.filter(item => {
+        //         return item.user === user
         //     })
         // };
         
-        // const test = b(idToSearch);
+        // const test = b(user);
         // console.log(test);
-        // this.props.fetchDetail(test[0]);
-        // this.setState({detail: test[0]});
     }
     render() {
-        
-        const {detail} = this.props;
-        console.log("this.props.detail: ", detail);
+        const {user} = this.props;
+        console.log(this.props);
+        console.log("this.props.user: ", user);
+        let detail = this.props.user ? this.props.user : null;
+        console.log(detail);
 
         // function openTab() {
         //     window.open(repos.owner.html_url);
@@ -59,12 +60,11 @@ export class AccountDetail extends Component {
 AccountDetail.prototypes = {
     fetchDetail: PropTypes.func.isRequired,
     findUser: PropTypes.func.isRequired,
-    repos: PropTypes.array.isRequired,
+    user: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
-    detail: state.repos.detail,
-    repos: state.repos.items,
+    user: state.repos.user,  
 });
 
 export default connect(mapStateToProps, { fetchDetail, findUser })(AccountDetail);

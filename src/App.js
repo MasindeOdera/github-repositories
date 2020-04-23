@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar';
 import GithubRepo from './components/GithubRepo';
-import { AccountDetail } from './components/AccountDetail';
+import AccountDetail from './components/AccountDetail';
 import './App.css';
 import { Provider } from 'react-redux';
 import {HashRouter as Router, Route} from 'react-router-dom';

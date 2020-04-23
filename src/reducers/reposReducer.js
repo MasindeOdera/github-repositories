@@ -2,7 +2,7 @@ import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, FIND_USER, LOADING } from '../a
 
 const initialState = {
     query: '',
-    user:'',
+    user:[],
     items: [],
     item: {},
     detail: [],
@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         case FETCH_DETAIL:
             return {
                 ...state,
-                // user: action.payload
+                user: action.payload
             };
         case FIND_USER:
             return {

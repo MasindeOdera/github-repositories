@@ -16,19 +16,18 @@ export const fetchQuery = query => {
     }
 };
 
-export const fetchDetail = detail => dispatch => {
+export const fetchDetail = () => dispatch => {
     dispatch({
         type: FETCH_DETAIL,
-        payload: detail
     })
 };
 
 export const findUser = user => dispatch => {
-    fetch(`https://api.github.com/search/user?q=${user}+in:users`)
+    fetch(`https://api.github.com/search/users?q=${user}`)
     .then(res => res.json())
     .then(data => dispatch({
         type: FIND_USER,
-        payload: data.item,
+        payload: data.items,
     })).then(data => console.log(data));
 };
 
