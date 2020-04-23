@@ -1,4 +1,4 @@
-import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, LOADING } from './types';
+import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, FIND_USER, LOADING } from './types';
 
 export const fetchRepos = query => dispatch => {
     fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories`)
@@ -21,6 +21,15 @@ export const fetchDetail = detail => dispatch => {
         type: FETCH_DETAIL,
         payload: detail
     })
+};
+
+export const findUser = user => dispatch => {
+    fetch(`https://api.github.com/search/user?q=${user}+in:users`)
+    .then(res => res.json())
+    .then(data => dispatch({
+        type: FIND_USER,
+        payload: data.item,
+    })).then(data => console.log(data));
 };
 
 export const setLoading = () => {
