@@ -1,10 +1,10 @@
-import { FETCH_REPOS, FETCH_QUERY } from '../actions/types';
+import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, LOADING } from '../actions/types';
 
 const initialState = {
     query: '',
     items: [],
     item: {},
-    article: [],
+    detail: [],
     loading: true,
     id: [],
 }
@@ -23,6 +23,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 query: action.payload
+            };
+        case FETCH_DETAIL:
+            return {
+                ...state,
+                detail: action.payload
+            };
+        case LOADING:
+            return {
+                ...state,
+                loading: false,
             };
         default:
             return state;

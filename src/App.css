@@ -88,5 +88,10 @@ td {
   color: #000;
 }
 
-.Account tr:nth-child(even) td {background: #d9d9df}
-.Account tr:nth-child(odd) td {background: #5e5e64}
+.Account tr:nth-child(even) td {
+  background: #d9d9df
+}
+
+.Account tr:nth-child(odd) td {
+  background: #5e5e64
+}

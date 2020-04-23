@@ -29,8 +29,8 @@ export class GithubRepo extends Component {
             <div>
                 { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
                 <table  className="Account">
+                    {header}
                     <tbody>
-                        {header}
                         {content}
                     </tbody>
                 </table>
