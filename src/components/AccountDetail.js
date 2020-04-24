@@ -51,7 +51,7 @@ class AccountDetail extends Component {
                     <p>Following: {detail.following}</p>
                     <p>Followers: {detail.followers}</p>
                     <Link to={""} onClick={openTab}>
-                        <p><button>{detail.login}'s' Github Account</button></p>
+                        <p><button>{detail.login}'s Github Account</button></p>
                     </Link>
                 </div>  
             </React.Fragment>);
