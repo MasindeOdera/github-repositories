@@ -16,6 +16,8 @@ class AccountDetail extends Component {
     }
 
     componentDidMount() {
+        //As I have not finished the test, I thought it would help to
+        //see some of the ideas I had. So I left some ideas commented out.
         // let user = this.props.match.params.id;
         // this.props.findUser(user);
         // this.props.storeDetail();

@@ -28,7 +28,6 @@ class SearchBar extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.fetchRepos(this.props.query);
-        console.log(this.props.query);
     }
 
     render() {
