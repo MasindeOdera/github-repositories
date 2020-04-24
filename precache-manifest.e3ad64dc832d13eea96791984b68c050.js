@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "811251803dc764a178719c21facb28c4",
+    "revision": "111bf34ab67654acd233ca25050abfec",
     "url": "/github-repositories/index.html"
   },
   {
-    "revision": "19952ff20b49f27b0327",
+    "revision": "7d2fac883fa39033fb5c",
     "url": "/github-repositories/static/css/main.86ec39c5.chunk.css"
   },
   {
@@ -16,15 +16,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/github-repositories/static/js/2.18a07689.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9573c21ef7378e0bd51a",
-    "url": "/github-repositories/static/js/3.1ec9b071.chunk.js"
+    "revision": "4b05f75e0b926f42c62a",
+    "url": "/github-repositories/static/js/3.b9f605e7.chunk.js"
   },
   {
-    "revision": "19952ff20b49f27b0327",
-    "url": "/github-repositories/static/js/main.5f9365f2.chunk.js"
+    "revision": "7d2fac883fa39033fb5c",
+    "url": "/github-repositories/static/js/main.3ddb319d.chunk.js"
   },
   {
-    "revision": "7dcc2df225eef27084f2",
-    "url": "/github-repositories/static/js/runtime-main.9aabfef4.js"
+    "revision": "0d635021dab038429819",
+    "url": "/github-repositories/static/js/runtime-main.7cdb429c.js"
   }
 ]);
