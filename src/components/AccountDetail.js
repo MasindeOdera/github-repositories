@@ -67,19 +67,6 @@ class AccountDetail extends Component {
     }
 }
 
-// const detailBorder = {
-//     backgroundColor: '#d9d9df',
-//     padding: '4px',
-//     margin: '6px',
-//     height: 'inherit',
-// }
-
-// const detailImage = {
-//     width: '10rem',
-//     height: '10rem',
-//     float: 'left',
-// }
-
 AccountDetail.prototypes = {
     storeDetail: PropTypes.func.isRequired,
     findUser: PropTypes.func.isRequired,

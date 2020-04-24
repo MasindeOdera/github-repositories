@@ -6,6 +6,7 @@ export const fetchRepos = query => dispatch => {
     .then(data => dispatch({
         type: FETCH_REPOS,
         payload: data.items,
+        error: data.incomplete_results,     
     })).then(data => console.log(data));
 };
 

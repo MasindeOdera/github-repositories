@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import Accounts from './Accounts';
+import React, { Component, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRepos } from '../actions/reposActions';
 import '../App.css';
+
+const Accounts = React.lazy(() => import('./Accounts'));
 
 export class GithubRepo extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export class GithubRepo extends Component {
     render() {
         const {query, repos} = this.props;
         console.log("props: ", this.props);
+        console.log("state: ", this.state);
         console.log("repos: ", repos);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
@@ -27,13 +29,15 @@ export class GithubRepo extends Component {
 
         return (
             <div>
-                { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
-                <table  className="Account">
-                    {header}
-                    <tbody>
-                        {content}
-                    </tbody>
-                </table>
+                <Suspense fallback={<div>Loading, please wait...</div>}>
+                    { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
+                    <table  className="Account">
+                        {header}
+                        <tbody>
+                            {content}
+                        </tbody>
+                    </table>
+                </Suspense>
             </div>
         )
     }
