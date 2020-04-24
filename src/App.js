@@ -17,7 +17,7 @@ class App extends Component {
             <h1>Explore Github Repositories</h1>
             <Route exact path="/" component={SearchBar} />
             <Route exact path="/" component={GithubRepo} />
-            <Route exact path="/account/:id" component={AccountDetail} />
+            <Route exact path="/repo/:owner/:repo" component={AccountDetail} />
           </div>
         </Router>
       </Provider>

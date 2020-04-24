@@ -1,4 +1,4 @@
-import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, FIND_USER, LOADING } from '../actions/types';
+import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING } from '../actions/types';
 
 const initialState = {
     query: '',
@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
                 ...state,
                 query: action.payload
             };
-        case FETCH_DETAIL:
+        case STORE_DETAIL:
             return {
                 ...state,
                 user: action.payload

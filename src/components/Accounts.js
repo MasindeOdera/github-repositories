@@ -16,15 +16,19 @@ class Accounts extends Component {
         let account = (
             <tr>
                 <td>
-                    <Link to={"/account/" + repos.owner.login } repos={repos}>
+                    <Link to={"/repo/" + repos.full_name } repos={repos}>
                         <img src={repos.owner.avatar_url} alt="img" style={repoImage} />
                     </Link>
                 </td>
-                <td style={{fontSize: '0.86rem',}}>{repos.owner.login}</td>
-                <td>{repos.description}</td>
-                <td>{repos.created_at.slice(0,10)}</td>
-                <td>{repos.watchers}</td>
-                <td>{String(repos.private)}</td>
+                <td>
+                    <Link to={"/repo/" + repos.full_name } repos={repos}>
+                        {repos.name}
+                    </Link>                     
+                </td>
+                <td><Link to={"/repo/" + repos.full_name } repos={repos}>{repos.description}</Link></td>
+                <td><Link to={"/repo/" + repos.full_name } repos={repos}>{repos.created_at.slice(0,10)}</Link></td>
+                <td><Link to={"/repo/" + repos.full_name } repos={repos}>{repos.watchers}</Link></td>
+                <td><Link to={"/repo/" + repos.full_name } repos={repos}>{String(repos.private)}</Link></td>
             </tr>);
 
         return (

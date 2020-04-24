@@ -1,4 +1,4 @@
-import { FETCH_REPOS, FETCH_QUERY, FETCH_DETAIL, FIND_USER, LOADING } from './types';
+import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING } from './types';
 
 export const fetchRepos = query => dispatch => {
     fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories`)
@@ -16,9 +16,9 @@ export const fetchQuery = query => {
     }
 };
 
-export const fetchDetail = () => dispatch => {
+export const storeDetail = () => dispatch => {
     dispatch({
-        type: FETCH_DETAIL,
+        type: STORE_DETAIL,
     })
 };
 
