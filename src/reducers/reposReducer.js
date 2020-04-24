@@ -7,6 +7,7 @@ const initialState = {
     item: {},
     detail: [],
     loading: true,
+    retrieved: false,
     
 }
 
@@ -18,6 +19,7 @@ export default function (state = initialState, action) {
                 items: action.payload,
                 query: state.query,
                 loading: false,
+                retrieved: true,
             };
         case FETCH_QUERY:
             return {

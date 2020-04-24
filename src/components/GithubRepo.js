@@ -5,12 +5,14 @@ import { fetchRepos } from '../actions/reposActions';
 import '../App.css';
 
 const Accounts = React.lazy(() => import('./Accounts'));
+const ResultNotFound = React.lazy(() => import('./ResultNotFound'));
 
 export class GithubRepo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             repos: this.props.repos,
+            retrieved: this.props.retrieved,
         }
     }
 
@@ -19,7 +21,8 @@ export class GithubRepo extends Component {
     }
 
     render() {
-        const {query, repos} = this.props;
+        console.log(this.props.retrieved);
+        const {query, repos, retrieved} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
@@ -36,6 +39,7 @@ export class GithubRepo extends Component {
                             {content}
                         </tbody>
                     </table>
+                    {retrieved && repos.length === 0 ? <ResultNotFound /> : null}
                 </Suspense>
             </div>
         )
@@ -50,6 +54,7 @@ GithubRepo.prototypes = {
 const mapStateToProps = state => ({
     repos: state.repos.items,
     query: state.repos.query,
+    retrieved: state.repos.retrieved,
 });
 
 export default connect(mapStateToProps, { fetchRepos })(GithubRepo);
