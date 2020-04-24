@@ -8,6 +8,7 @@ class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = { query: this.props.query};
+        this.timeout =  0;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -15,7 +16,13 @@ class SearchBar extends Component {
     handleChange(e) {
         e.preventDefault();
         this.props.fetchQuery(e.target.value);
-        console.log(e.target.value);
+
+        //This allows the user to search without hitting submit.
+        let searchText = e.target.value;
+        if(this.timeout) clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.props.fetchRepos(searchText);
+        }, 300);
     }
     
     handleSubmit(e) {
