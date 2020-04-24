@@ -22,12 +22,15 @@ class SearchBar extends Component {
         if(this.timeout) clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
             this.props.fetchRepos(searchText);
-        }, 300);
+        }, 600);
     }
     
     handleSubmit(e) {
         e.preventDefault();
-        this.props.fetchRepos(this.props.query);
+        // this.props.fetchRepos(this.props.query);
+        if(this.props.query !== 'undefined') {
+            this.props.fetchRepos(this.props.query);
+        }
     }
 
     render() {

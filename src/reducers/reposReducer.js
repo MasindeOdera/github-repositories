@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
         case FETCH_REPOS:
             return {
                 ...state,
-                items: action.payload,
+                items: action.payload || [],
                 query: state.query,
                 loading: false,
                 retrieved: true,
