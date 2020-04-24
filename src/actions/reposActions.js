@@ -5,8 +5,7 @@ export const fetchRepos = query => dispatch => {
     .then(res => res.json())
     .then(data => dispatch({
         type: FETCH_REPOS,
-        payload: data.items,
-        error: data.incomplete_results,     
+        payload: data.items,     
     })).then(data => console.log(data));
 };
 

@@ -11,7 +11,6 @@ class Accounts extends Component {
     }
     
     render() {
-        console.log("this.props in Accounts: ", this.props);
         const {repos} = this.props;
         let account = (
             <tr>

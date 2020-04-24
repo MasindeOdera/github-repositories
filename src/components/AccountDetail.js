@@ -32,7 +32,6 @@ class AccountDetail extends Component {
     }
 
     render() {
-        console.log(this.state.userData);
         const detail = this.state.userData;
         function openTab() {
             window.open(detail.html_url);
@@ -52,7 +51,7 @@ class AccountDetail extends Component {
                     <p>Following: {detail.following}</p>
                     <p>Followers: {detail.followers}</p>
                     <Link to={""} onClick={openTab}>
-                        <p><button>{detail.name}'s' Github Account</button></p>
+                        <p><button>{detail.login}'s' Github Account</button></p>
                     </Link>
                 </div>  
             </React.Fragment>);

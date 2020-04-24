@@ -20,9 +20,7 @@ export class GithubRepo extends Component {
 
     render() {
         const {query, repos} = this.props;
-        console.log("props: ", this.props);
-        console.log("state: ", this.state);
-        console.log("repos: ", repos);
+        let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
         const header = repos.length > 0 ? <thead><tr><th>Avatar</th><th>Name</th><th>Description</th><th>Created</th><th>Watchers</th><th>Private</th></tr></thead> : null;
@@ -31,6 +29,7 @@ export class GithubRepo extends Component {
             <div>
                 <Suspense fallback={<div>Loading, please wait...</div>}>
                     { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
+                    {content ? <span>Duration approximately {miliseconds}ms</span> : null}
                     <table  className="Account">
                         {header}
                         <tbody>

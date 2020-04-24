@@ -7,7 +7,6 @@ const initialState = {
     item: {},
     detail: [],
     loading: true,
-    error: ''
     
 }
 
@@ -19,7 +18,6 @@ export default function (state = initialState, action) {
                 items: action.payload,
                 query: state.query,
                 loading: false,
-                error: action.error,
             };
         case FETCH_QUERY:
             return {
