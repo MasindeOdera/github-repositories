@@ -29,8 +29,9 @@ export class GithubRepo extends Component {
         const {query, repos, totalCount, loading} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
+        //If loading is true, then content and header should not be visible.
         content = repos.length > 0 && !loading ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
-        const header = repos.length > 0 ? <thead><tr><th>Avatar</th><th>Name</th><th>Description</th><th>Created</th><th>Watchers</th><th>Private</th></tr></thead> : null;
+        const header = repos.length > 0 && !loading ? <thead><tr><th>Avatar</th><th>Name</th><th>Description</th><th>Created</th><th>Watchers</th><th>Private</th></tr></thead> : null;
 
         return (
             <div>
