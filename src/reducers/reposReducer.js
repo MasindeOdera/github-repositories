@@ -5,9 +5,7 @@ const initialState = {
     user:[],
     items: [],
     loading: false,
-    retrieved: false,
-    totalCount: '',
-    
+    totalCount: '',   
 }
 
 export default function (state = initialState, action) {
@@ -18,7 +16,6 @@ export default function (state = initialState, action) {
                 items: action.payload.items || [],
                 query: state.query,
                 loading: false,
-                retrieved: true,
                 totalCount: action.payload.total_count,
             };
         case FETCH_QUERY:

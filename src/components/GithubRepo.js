@@ -13,7 +13,6 @@ export class GithubRepo extends Component {
         super(props);
         this.state = {
             repos: this.props.repos,
-            retrieved: this.props.retrieved,
             totalCount: this.props.totalCount,
             loading: this.props.loading,
         }
@@ -26,9 +25,7 @@ export class GithubRepo extends Component {
 
     render() {
         console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
-        console.log("this.props.totalCount: ", this.props.totalCount);
         console.log("this.props: ", this.props);
-        console.log("this.loading: ", this.props.loading);
         const {query, repos, totalCount, loading} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
@@ -40,6 +37,7 @@ export class GithubRepo extends Component {
                 <Suspense fallback={<div>Loading, please wait...</div>}>
                     {/* The h1 is only displayed once the user types */}
                     { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
+                    {/* The Spinner is only visible when loading is true */}
                     {loading ? <Spinner /> : null}
                     {content ? <span>Duration approximately {miliseconds}ms</span> : null}
                     <table  className="Account">
@@ -48,8 +46,7 @@ export class GithubRepo extends Component {
                             {content}
                         </tbody>
                     </table>
-                    {/*retrieved && repos.length === 0 ? <ResultNotFound /> : null*/}
-                    {totalCount === 0 ? <ResultNotFound /> : null}
+                    {totalCount === 0 && !loading ? <ResultNotFound /> : null}
                 </Suspense>
             </div>
         )
@@ -64,7 +61,6 @@ GithubRepo.prototypes = {
 const mapStateToProps = state => ({
     repos: state.repos.items,
     query: state.repos.query,
-    retrieved: state.repos.retrieved,
     totalCount: state.repos.totalCount,
     loading: state.repos.loading,
 });
