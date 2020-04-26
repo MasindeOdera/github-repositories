@@ -4,10 +4,10 @@ const initialState = {
     query: '',
     user:[],
     items: [],
-    item: {},
     detail: [],
     loading: true,
     retrieved: false,
+    totalCount: '',
     
 }
 
@@ -16,10 +16,11 @@ export default function (state = initialState, action) {
         case FETCH_REPOS:
             return {
                 ...state,
-                items: action.payload || [],
+                items: action.payload.items || [],
                 query: state.query,
                 loading: false,
                 retrieved: true,
+                totalCount: action.payload.total_count,
             };
         case FETCH_QUERY:
             return {

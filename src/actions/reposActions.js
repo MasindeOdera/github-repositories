@@ -1,11 +1,11 @@
 import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING } from './types';
 
 export const fetchRepos = query => dispatch => {
-    fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories`)
+    fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories?page=2&per_page=100`)
     .then(res => res.json())
     .then(data => dispatch({
-        type: FETCH_REPOS,
-        payload: data.items,     
+        type: FETCH_REPOS,   
+        payload: data,     
     })).then(data => console.log(data));
 };
 

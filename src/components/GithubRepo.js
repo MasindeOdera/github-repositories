@@ -13,16 +13,20 @@ export class GithubRepo extends Component {
         this.state = {
             repos: this.props.repos,
             retrieved: this.props.retrieved,
+            totalCount: this.props.totalCount,
         }
     }
 
     componentDidMount() {
         this.setState({repos: this.props.repos});
+        this.setState({totalCount: this.props.totalCount});
     }
 
     render() {
-        console.log(this.props.retrieved);
-        const {query, repos, retrieved} = this.props;
+        console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+        console.log("this.props.totalCount: ", this.props.totalCount);
+        console.log("this.props: ", this.props);
+        const {query, repos, totalCount} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
@@ -31,6 +35,7 @@ export class GithubRepo extends Component {
         return (
             <div>
                 <Suspense fallback={<div>Loading, please wait...</div>}>
+                    {/* The h1 is only displayed once the user types */}
                     { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
                     {content ? <span>Duration approximately {miliseconds}ms</span> : null}
                     <table  className="Account">
@@ -39,7 +44,8 @@ export class GithubRepo extends Component {
                             {content}
                         </tbody>
                     </table>
-                    {retrieved && repos.length === 0 ? <ResultNotFound /> : null}
+                    {/*retrieved && repos.length === 0 ? <ResultNotFound /> : null*/}
+                    {totalCount === 0 ? <ResultNotFound /> : null}
                 </Suspense>
             </div>
         )
@@ -55,6 +61,7 @@ const mapStateToProps = state => ({
     repos: state.repos.items,
     query: state.repos.query,
     retrieved: state.repos.retrieved,
+    totalCount: state.repos.totalCount,
 });
 
 export default connect(mapStateToProps, { fetchRepos })(GithubRepo);
