@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchQuery, fetchRepos } from '../actions/reposActions';
+import { fetchQuery, fetchRepos, setLoading } from '../actions/reposActions';
 import '../App.css';
 
 class SearchBar extends Component {
@@ -16,6 +16,7 @@ class SearchBar extends Component {
     handleChange(e) {
         e.preventDefault();
         this.props.fetchQuery(e.target.value);
+        this.props.setLoading();
 
         //This allows the user to search without hitting submit.
         let searchText = e.target.value;
@@ -27,7 +28,8 @@ class SearchBar extends Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        // this.props.fetchRepos(this.props.query);
+        this.props.setLoading();
+        // only fetchRepos if a query is defined.
         if(this.props.query !== 'undefined') {
             this.props.fetchRepos(this.props.query);
         }
@@ -61,10 +63,11 @@ class SearchBar extends Component {
 SearchBar.protoTypes = {
     fetchQuery: PropTypes.func.isRequired,
     fetchRepos: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     query: state.repos.query,
 });
 
-export default connect(mapStateToProps, { fetchQuery, fetchRepos })(SearchBar);
+export default connect(mapStateToProps, { fetchQuery, fetchRepos, setLoading })(SearchBar);

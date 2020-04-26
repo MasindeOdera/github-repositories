@@ -4,8 +4,7 @@ const initialState = {
     query: '',
     user:[],
     items: [],
-    detail: [],
-    loading: true,
+    loading: false,
     retrieved: false,
     totalCount: '',
     
@@ -41,7 +40,7 @@ export default function (state = initialState, action) {
         case LOADING:
             return {
                 ...state,
-                loading: false,
+                loading: true,
             };
         default:
             return state;

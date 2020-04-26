@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRepos } from '../actions/reposActions';
@@ -14,6 +15,7 @@ export class GithubRepo extends Component {
             repos: this.props.repos,
             retrieved: this.props.retrieved,
             totalCount: this.props.totalCount,
+            loading: this.props.loading,
         }
     }
 
@@ -26,7 +28,8 @@ export class GithubRepo extends Component {
         console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
         console.log("this.props.totalCount: ", this.props.totalCount);
         console.log("this.props: ", this.props);
-        const {query, repos, totalCount} = this.props;
+        console.log("this.loading: ", this.props.loading);
+        const {query, repos, totalCount, loading} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
         content = repos.length > 0 ? repos.map((repos, index) => <Accounts key={index} repos={repos} />) : null;
@@ -37,6 +40,7 @@ export class GithubRepo extends Component {
                 <Suspense fallback={<div>Loading, please wait...</div>}>
                     {/* The h1 is only displayed once the user types */}
                     { query ? <h1 style={{margin: '10px 0px 10px 0px',}}>Displaying Repositories with "{query}"</h1> : null}
+                    {loading ? <Spinner /> : null}
                     {content ? <span>Duration approximately {miliseconds}ms</span> : null}
                     <table  className="Account">
                         {header}
@@ -62,6 +66,7 @@ const mapStateToProps = state => ({
     query: state.repos.query,
     retrieved: state.repos.retrieved,
     totalCount: state.repos.totalCount,
+    loading: state.repos.loading,
 });
 
 export default connect(mapStateToProps, { fetchRepos })(GithubRepo);
