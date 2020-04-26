@@ -1,11 +1,13 @@
-import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING } from '../actions/types';
+import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING, UPDATE_TOTAL_COUNT } from '../actions/types';
 
 const initialState = {
     query: '',
     user:[],
     items: [],
     loading: false,
-    totalCount: '',   
+    totalCount: '',
+    totalPages: 0,
+    currentPage: 0,   
 }
 
 export default function (state = initialState, action) {
@@ -16,7 +18,7 @@ export default function (state = initialState, action) {
                 items: action.payload.items || [],
                 query: state.query,
                 loading: false,
-                totalCount: action.payload.total_count,
+                // totalCount: state.totalCount,
             };
         case FETCH_QUERY:
             return {
@@ -38,6 +40,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: true,
+            };
+        case UPDATE_TOTAL_COUNT:
+            return {
+                ...state,
+                totalCount: action.payload,
             };
         default:
             return state;

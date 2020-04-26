@@ -1,7 +1,8 @@
-import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING } from './types';
+import { FETCH_REPOS, FETCH_QUERY, STORE_DETAIL, FIND_USER, LOADING, UPDATE_TOTAL_COUNT } from './types';
 
-export const fetchRepos = query => dispatch => {
-    fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories?page=2&per_page=100`)
+export const fetchRepos = (query) => dispatch => {
+    // const pageNumber = updatedPageNumber ? updatedPageNumber : 1;
+    fetch(`https://api.github.com/search/repositories?q=${query}+in:repositories?page=${1}&per_page=100`)
     .then(res => res.json())
     .then(data => dispatch({
         type: FETCH_REPOS,   
@@ -34,5 +35,12 @@ export const findUser = user => dispatch => {
 export const setLoading = () => {
     return {
         type: LOADING
+    }
+};
+
+export const updateTotalCount = totalCount => {
+    return {
+        type: UPDATE_TOTAL_COUNT,
+        payload: totalCount
     }
 };

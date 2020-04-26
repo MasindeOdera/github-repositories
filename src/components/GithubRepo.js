@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRepos } from '../actions/reposActions';
+import { fetchRepos, updateTotalCount } from '../actions/reposActions';
 import '../App.css';
 
 const Accounts = React.lazy(() => import('./Accounts'));
@@ -15,17 +15,28 @@ export class GithubRepo extends Component {
             repos: this.props.repos,
             totalCount: this.props.totalCount,
             loading: this.props.loading,
+            totalPages: this.props.totalPages,
+            currentPage: this.props.currentPage,
         }
     }
 
     componentDidMount() {
         this.setState({repos: this.props.repos});
         this.setState({totalCount: this.props.totalCount});
+
+        // const getPagesCount = (total, denominator) => {
+        //     total = this.props.totalCount;
+        //     denominator = 100;
+        //     const divisible = total % denominator === 0;
+        //     const valueToBeAdded = divisible ? 0 : 1;
+        //     let totalPages = Math.floor(total / denominator) + valueToBeAdded;
+        //     this.setState({totalPages: totalPages});
+        //     return Math.floor(total / denominator) + valueToBeAdded;
+        // };
     }
 
     render() {
-        console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
-        console.log("this.props: ", this.props);
+        // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
         const {query, repos, totalCount, loading} = this.props;
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
@@ -56,6 +67,7 @@ export class GithubRepo extends Component {
 
 GithubRepo.prototypes = {
     fetchRepos: PropTypes.func.isRequired,
+    updateTotalCount: PropTypes.func.isRequired,
     repos: PropTypes.array.isRequired,
 }
 
@@ -64,6 +76,8 @@ const mapStateToProps = state => ({
     query: state.repos.query,
     totalCount: state.repos.totalCount,
     loading: state.repos.loading,
+    totalPages: state.repos.totalPages,
+    currentPage: state.repos.currentPage,
 });
 
-export default connect(mapStateToProps, { fetchRepos })(GithubRepo);
+export default connect(mapStateToProps, { fetchRepos, updateTotalCount })(GithubRepo);
