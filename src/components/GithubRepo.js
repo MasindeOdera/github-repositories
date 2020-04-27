@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import Spinner from './Spinner';
+import LandingPage from './LandingPage';
 import Pagination from "react-js-pagination";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,7 +9,6 @@ import '../App.css';
 
 const Accounts = React.lazy(() => import('./Accounts'));
 const ResultNotFound = React.lazy(() => import('./ResultNotFound'));
-// require("./node_modules/bootstrap/less/bootstrap.less");
 
 export class GithubRepo extends Component {
     constructor(props) {
@@ -20,7 +20,6 @@ export class GithubRepo extends Component {
             totalPages: this.props.totalPages,
             currentPage: this.props.currentPage,
             activePage: this.props.activePage,
-            found: true,
         }
     }
 
@@ -28,20 +27,10 @@ export class GithubRepo extends Component {
         this.setState({repos: this.props.repos});
         this.setState({totalCount: this.props.totalCount});
         this.props.updateTotalCount(this.props.totalCount);
-
-        // const getPagesCount = (total, denominator) => {
-        //     total = this.props.totalCount;
-        //     denominator = 100;
-        //     const divisible = total % denominator === 0;
-        //     const valueToBeAdded = divisible ? 0 : 1;
-        //     let totalPages = Math.floor(total / denominator) + valueToBeAdded;
-        //     this.setState({totalPages: totalPages});
-        //     return Math.floor(total / denominator) + valueToBeAdded;
-        // };
     }
 
     handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
+        // console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
         this.setState({currentPage: pageNumber});
         this.props.setCurrentPage(pageNumber);
@@ -51,9 +40,7 @@ export class GithubRepo extends Component {
     render() {
         // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
         const {query, repos, loading, totalCount} = this.props;
-        console.log("this.state: ", this.state);
-        console.log("this.props: ", this.props);
-        console.log("this.props.totalCount: ", this.props.totalCount);
+
         let miliseconds = Math.round(performance.getEntries('measure')[0].duration);
         let content = '';
         //If loading is true, then content and header should not be visible.
@@ -85,6 +72,8 @@ export class GithubRepo extends Component {
                     {pagination}
                     {/* If no accounts are returned, but there has been a serach queried, then show no results found. */}
                     {totalCount === 0 && !loading && query.length > 0 ? <ResultNotFound /> : null}
+                    {/* Just a little gif to get the party started */}
+                    {totalCount === 0 && !loading && query.length === 0 ? <LandingPage /> : null}
                 </Suspense>
             </div>
         )
