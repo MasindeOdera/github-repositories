@@ -7,7 +7,7 @@ import '../App.css';
 class SearchBar extends Component {
     constructor(props) {
         super(props)
-        this.state = { query: this.props.query, updatedPageNumber: 0};
+        this.state = { query: this.props.query, currentPage: this.props.currentPage};
         this.timeout =  0;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,9 +20,10 @@ class SearchBar extends Component {
 
         //This allows the user to search without hitting submit.
         let searchText = e.target.value;
+        let currentPage = this.props.currentPage;
         if(this.timeout) clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            this.props.fetchRepos(searchText);
+            this.props.fetchRepos(currentPage, searchText);
         }, 600);
     }
     
@@ -31,7 +32,7 @@ class SearchBar extends Component {
         this.props.setLoading();
         // only fetchRepos if a query is defined.
         if(this.props.query !== 'undefined') {
-            this.props.fetchRepos(this.updatedPageNumber, this.props.query);
+            this.props.fetchRepos(this.props.currentPage, this.props.query);
         }
     }
 
@@ -68,7 +69,7 @@ SearchBar.protoTypes = {
 
 const mapStateToProps = state => ({
     query: state.repos.query,
-    updatedPageNumber: state.repos.currentPage,
+    currentPage: state.repos.currentPage,
 });
 
 export default connect(mapStateToProps, { fetchQuery, fetchRepos, setLoading })(SearchBar);
