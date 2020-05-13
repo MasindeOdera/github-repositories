@@ -14,7 +14,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <h1>Explore Github Repositories</h1>
+            <h1>Explore some Github Repositories</h1>
             <Route exact path="/" component={SearchBar} />
             <Route exact path="/" component={GithubRepo} />
             <Route exact path="/repo/:owner/:repo" component={AccountDetail} />
